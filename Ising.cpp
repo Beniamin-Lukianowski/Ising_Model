@@ -48,9 +48,9 @@ void plot(vector<float> x, vector<float> y){};
 
 // funkcja licząca energie i prawdopodobieństwo zmiany dla dowolnej cząsteczki
 // oraz zmienia stan jeżeli będzie to dane
-vector<vector<int>> Do_Energy_and_Prop_Calc(vector<vector<int>> vecE,
-                                            vector<float> *Mags,
-                                            vector<float> *Temps, int width,
+void Do_Energy_and_Prop_Calc(vector<vector<int>> &vecE,
+                                            vector<float> &Mags,
+                                            vector<float> &Temps, int width,
                                             float bj) {
 
   // Wybranie dowolnego wiersza 0-input
@@ -136,10 +136,9 @@ vector<vector<int>> Do_Energy_and_Prop_Calc(vector<vector<int>> vecE,
   }
 
   float Me = abs(namagnesowanie) / pow(vecE.size(), 2);
-  Mags->push_back(Me);
-  Temps->push_back(1 / bj);
+  Mags.push_back(Me);
+  Temps.push_back(1 / bj);
 
-  return vecE;
 };
 
 // Klasa map - odpowiada bitmapie(macierzy spinów w tym przypadku) zapełnionej
@@ -191,7 +190,7 @@ int main(int argc, char *argv[]) {
   //   cout << "\n";
   // }
   for (int i = 0; i < bj.size(); i++) {
-    map.vec = Do_Energy_and_Prop_Calc(map.vec, &Magnes, &Te, input, bj[i]);
+    Do_Energy_and_Prop_Calc(map.vec, Magnes, Te, input, bj[i]);
   }
   plot(Te, Magnes);
 }
